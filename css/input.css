@@ -1,0 +1,123 @@
+.user-input-wrp {
+	position: relative;
+	width: 100%;
+}
+.user-input-wrp .inputText{
+	width: 90%;
+	outline: none;
+	border:none;
+	font-size:15px;
+	float:right;
+	border-bottom: 1px solid #777;
+	background-color: #e6fff2;
+}
+
+.inputDOB{
+	width: 90%;
+	outline: none;
+	border:none;
+	font-size:15px;
+	float:right;
+	border-bottom: 1px solid #777;
+	background-color: #ccffcc;
+	-webkit-text-fill-color:#ccffcc;
+}
+.user-input-wrp .inputText:focus{
+	border-color: blue;
+	border-width: medium medium 2px;
+}
+.user-input-wrp .floating-label {
+	position: absolute;
+	pointer-events: none;
+	top: 18px;
+	left:10%;
+	font-size:14px;
+	transition: 0.2s ease all;
+}
+.user-input-wrp input:focus ~ .floating-label,
+.user-input-wrp input:not(:focus):valid ~ .floating-label{
+	top: 0px;
+	left: 10%;
+	color:blue;
+	font-size: 12px;
+	opacity: 1;
+}
+.up_btn
+{
+	background: white;
+  	border: 3px solid #0047b3;
+  	color: black;
+  	padding: 8px;
+  	width:150px;
+  	text-align: center;
+  	font-family: 'Roboto';
+  	font-size: 14px;
+  	border-radius: 8px;
+}
+.up_btn:hover {
+  background-color: #6699ff;
+  color: white;
+}
+.res_btn
+{
+	background: white;
+  	border: 3px solid #4CAF50;
+  	color: black;
+  	padding: 8px;
+  	width:180px;
+  	text-align: center;
+  	font-family: 'Roboto';
+  	font-size: 14px;
+  	border-radius: 14px;
+}
+.res_btn:hover {
+  background-color: #4CAF50;
+  color: white;
+ }
+.image
+{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	border-radius: 12px;
+}
+
+
+
+.green_btn
+{
+	background: white;
+  	border: 2px solid #4CAF50;
+  	color: black;
+  	padding: 3px;
+  	width:160px;
+  	text-align: center;
+  	font-family: 'Roboto';
+  	font-size: 12px;
+  	border-radius: 12px;
+}
+.green_btn:hover {
+  background-color: #4CAF50;
+  color: white;
+ }
+
+.red_btn
+{
+	background: white;
+  	border: 3px solid red;
+  	color: black;
+  	padding: 3px;
+  	width:160px;
+  	text-align: center;
+  	font-family: 'Roboto';
+  	font-size: 12px;
+  	border-radius: 12px;
+}
+.red_btn:hover {
+  background-color: red;
+  color: white;
+ }
+
+ input[type=radio] {
+    width: 30px;
+    height: 30px;
+}
+

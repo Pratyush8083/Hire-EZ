@@ -1,0 +1,137 @@
+*
+{
+  margin: 0px;
+  padding: 0px;
+}
+html 
+{  
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body
+{
+	font-family: 'Roboto';		
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;  
+  	background-size: cover;
+  	background-position: center;
+}
+div
+{
+	margin-top:30px;
+	width:100%;
+}
+.header 
+{
+  color: white;
+  background: #8B0000;
+  text-align: center;
+  padding: 10px;
+}
+.form_tab
+{
+	padding:10px;
+	width:80%;
+	-webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+	background-color: #e6fff2;
+}
+.welcome_tab
+{
+	padding:10px;
+	width:80%;
+	-webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+	/*background:#f3f3f3;*/
+	text-align:center;
+	background-color: #e6fff2;
+}
+td
+{
+	padding:5px;
+}
+.btn 
+{
+  background: linear-gradient(to right, #00ccff 0%, #0000cc 100%);
+  border: none;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-family: 'Roboto';
+  font-size: 16px;
+  width:100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition-duration: 0.4s;
+}
+.btn:active 
+{
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+ }
+.btn:disabled
+{
+	opacity:0.6;
+}
+.agree
+{
+	border: 1px solid black;
+	height:200px;
+	padding:10px;
+	width:95%;
+	overflow-y: auto;
+	text-align: justify;
+	background:#f3f3f3;
+}
+.list
+{
+	width:80%;
+	margin-left:10%;
+}
+
+#check_y
+{
+	color:green;
+	font-size:13px;
+	margin-left:10%;
+}
+#check_n
+{
+	color:red;
+	font-size:13px;
+	margin-left:10%;
+}
+#match_y
+{
+	color:green;
+	font-size:13px;
+	margin-left:10%;
+}
+#match_n
+{
+	color:#e68a00;
+	font-size:13px;
+	margin-left:10%;
+}
+.cand_list
+{
+	border: 1px solid black;
+	height:300px;
+	padding:10px;
+	margin-left:10%;
+	width:80%;
+	overflow-y: auto;
+	text-align: justify;
+	background:#f3f3f3;
+}
+.vote_btn 
+{
+  background-color: #f44336;
+  border: none;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  border-radius:50%;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition-duration: 0.4s;
+}
+

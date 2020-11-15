@@ -1,0 +1,82 @@
+*
+{
+  margin: 0px;
+  padding: 0px;
+}
+
+html 
+{  
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body
+{
+	font-family: 'Roboto';
+}
+
+.del_btn
+{
+	  background : red;
+	  border: none;
+	  color: white;
+	  text-align: center;
+	  font-size: 14px;
+	  width:100%;
+	  border-radius: 5px;
+	  transition-duration: 0.4s;
+}
+
+.approve_btn
+{
+	  background : green;
+	  border: none;
+	  color: white;
+	  text-align: center;
+	  font-size: 14px;
+	  width:100%;
+	  border-radius: 5px;
+	  transition-duration: 0.4s;
+}
+
+
+table,th,td
+{
+	border-collapse: collapse;
+	padding:10px;
+}
+
+.btn 
+{
+  background: linear-gradient(to right, #00ccff 0%, #0000cc 100%);
+  border: none;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-family: 'Roboto';
+  font-size: 16px;
+  width:100%;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  transition-duration: 0.4s;
+}
+
+.form_tab
+{
+	padding:10px;
+	width:80%;
+	-webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+}
+
+.card{
+	
+	-webkit-box-shadow: 0 2.5px 2.5px 0 rgba(85, 182, 255, 0.28);
+}
+.header_text{
+	font-size:30px;
+	
+}
+.navbar{
+	opacity:0.7;
+	
+}
