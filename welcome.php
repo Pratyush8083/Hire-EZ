@@ -1,3 +1,9 @@
+<?php
+	ob_start();
+	session_start();
+?>
+
+<!DOCTYPE HTML>
 <html>   
 
 <head>
@@ -19,14 +25,13 @@
 
 	<tr>
 		<td><br/>
-		<h3>Welcome <u>${username}</u></h3>
+		<h3>Welcome</h3><h2><?php echo $_SESSION["username"] ?></h2>
 		</td>
 	</tr>	
 
 	<tr>
 		<td><br/>
-		Your application is successfully submitted for verification.<br/>
-		<h4><font color="red">You will receive confirmation e-mail once verified by field officers.</font></h4>
+		You are registered successfully. Please read our terms carefully.
 		</td>
 	</tr>
 	
@@ -35,7 +40,7 @@
 		<div class="agree">
 		<center><u><h4>Terms and Conditions ("Terms")</h4></u></center>
 		<br/>
-		<p>Please read these Terms and Conditions carefully before using the Online National Polling (the "Service") operated by <b>ANURAG, PRATYUSH, SUBBOOH and DEEPANSHU</b>.</p>
+		<p>Please read these Terms and Conditions carefully before using the Smart Online Hiring Application, Hire-EZ (the "Service") operated by <b>ANURAG, PRATYUSH, SHUBHAM and NISHA</b>.</p>
 
 		<p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
 

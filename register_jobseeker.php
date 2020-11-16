@@ -1,9 +1,6 @@
 <?php
-
 	ob_start();
-
 	session_start();
-
 ?>
 
 <!DOCTYPE HTML>
@@ -39,7 +36,7 @@
 
 <body>
 <div align="center" id="main_form">	
-	<form action="welcome.php" method="POST">
+	<form action="register_jobseeker.php" method="POST">
 	<table class="form_tab">
 	<tr>
 		<td colspan=5><center><a href="index.php"><img src="images/logo3.png" height=50/></a></center></td>
@@ -75,7 +72,7 @@
 		<td colspan=5>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
-		<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+		<input type="text" name="phone" id="phone" autocomplete="off" class="inputText" required/>
 		<span class="floating-label">Phone</span><br/>
 		</div>
 		</td>
@@ -96,25 +93,25 @@
 		<td><u><h4>Communication Address</h4></u></td>
 		<td>
 			<div class="user-input-wrp"><br/>
-			<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+			<input type="text" name="street" id="street" autocomplete="off" class="inputText" required/>
 			<span class="floating-label">Street</span><br/>
 			</div>
 		</td>
 		<td>
 			<div class="user-input-wrp"><br/>
-			<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+			<input type="text" name="city" id="city" autocomplete="off" class="inputText" required/>
 			<span class="floating-label">City</span><br/>
 			</div>
 		</td>
 		<td>
 			<div class="user-input-wrp"><br/>
-			<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+			<input type="text" name="state" id="state" autocomplete="off" class="inputText" required/>
 			<span class="floating-label">State</span><br/>
 			</div>
 		</td>
 		<td>
 			<div class="user-input-wrp"><br/>
-			<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+			<input type="text" name="country" id="country" autocomplete="off" class="inputText" required/>
 			<span class="floating-label">Country</span><br/>
 			</div>
 		</td>
@@ -214,60 +211,40 @@ if(isset($_POST['continue']))
 {  
 
     $username=$_POST['username'];
-
-    $email=$_POST['email'];  
-
+	$dob=$_POST['dob'];       
+	$phone=$_POST['phone'];
+	$email=$_POST['email'];  
+	$street=$_POST['street'];  
+	$city=$_POST['city'];  
+	$state=$_POST['state'];  
+	$country=$_POST['country'];  
 	$password=$_POST['password'];
 
-	$password2=$_POST['password_2']; 
-
-	$sql="select * from users WHERE email=?";
-
+	$sql="select * from job_seeker WHERE email=?";
 	$stmt = $conn->prepare($sql);
-
 	$stmt->bind_param("s", $email);
-
 	$stmt->execute();
-
 	$result = $stmt->get_result();
 
 	if ($result->num_rows > 0) 
-
 	{ ?>
-
         <script>
-
 			document.getElementById('msg').innerHTML = "E-mail already exists!!";
-
 		</script>";
-
 	<?php }
-
 	else
-
 	{  
-
 	$enc_psw = password_hash($password, PASSWORD_DEFAULT);
-
-    $insert_user="insert into users (username,password,email) VALUES (?,?,?)";  
-
+    $insert_user="insert into job_seeker (name,dob,phone_no,email,street,city,state,country,password) VALUES (?,?,?,?,?,?,?,?,?)";  
     $stmt = $conn->prepare($insert_user);
 
-	$stmt->bind_param("sss", $username, $enc_psw, $email);
+	$stmt->bind_param("sssssssss", $username, $dob, $phone, $email, $street, $city, $state, $country, $enc_psw);
 
 	if($stmt->execute())  
-
     {  
-
 		$_SESSION["username"] = $username;
-
-		$_SESSION["email"] = $email;
-
-		$_SESSION["password"] = $password;
-
-        header("Location: upload.php");
-
-    }  	
+        header("Location: welcome.php");		
+	}  
 	} 
 }
 ?>  
