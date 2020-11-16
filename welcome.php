@@ -14,7 +14,7 @@
 <div align="center">
 <table class="welcome_tab" style="background:#e6fff2;"> 
 	<tr>
-		<td><center><a href="index.html"><img src="images/logo3.png" height=50/></a></center></td>
+		<td><center><a href="index.php"><img src="images/logo3.png" height=50/></a></center></td>
 	</tr>
 
 	<tr>
@@ -64,7 +64,7 @@
 
 	<tr>
 		<td><br/><br/>
-		<button type="button" class="btn" name="home" id="continue" onclick = "window.location.href='index.html'">BACK TO HOMEPAGE</button>
+		<button type="button" class="btn" name="home" id="continue" onclick = "window.location.href='index.php'">BACK TO HOMEPAGE</button>
 		</td>
 	</tr>  
 

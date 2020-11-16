@@ -34,7 +34,7 @@
     
     <tr>
         <td>
-            <br/><a href="dashboard_field_officer.html" class="up_btn" style="margin-left:80%;">BACK TO DASHBOARD</a> <br/><br/>
+            <br/><a href="dashboard_field_officer.php" class="up_btn" style="margin-left:80%;">BACK TO DASHBOARD</a> <br/><br/>
         </td>
     </tr>
     </table>
@@ -69,8 +69,8 @@
             <td>${monthly_income}</td>
             <td>${net_worth}</td>
             <td>${criminal_record}</td>         
-            <td><a href="approve_candidate.html"><button class="approve_btn">Approve</button></a></td>  
-            <td><a href="reject_candidate.html"><button class="del_btn">Reject</button></a></td>  
+            <td><a href="approve_candidate.php"><button class="approve_btn">Approve</button></a></td>  
+            <td><a href="reject_candidate.php"><button class="del_btn">Reject</button></a></td>  
         </tr>  
 
         <tr>        
@@ -81,8 +81,8 @@
             <td>${monthly_income}</td>
             <td>${net_worth}</td>
             <td>${criminal_record}</td>         
-            <td><a href="approve_candidate.html"><button class="approve_btn">Approve</button></a></td>  
-            <td><a href="reject_candidate.html"><button class="del_btn">Reject</button></a></td>  
+            <td><a href="approve_candidate.php"><button class="approve_btn">Approve</button></a></td>  
+            <td><a href="reject_candidate.php"><button class="del_btn">Reject</button></a></td>  
         </tr>  
 
         <tr>        
@@ -93,8 +93,8 @@
             <td>${monthly_income}</td>
             <td>${net_worth}</td>
             <td>${criminal_record}</td>         
-            <td><a href="approve_candidate.html"><button class="approve_btn">Approve</button></a></td>  
-            <td><a href="reject_candidate.html"><button class="del_btn">Reject</button></a></td>  
+            <td><a href="approve_candidate.php"><button class="approve_btn">Approve</button></a></td>  
+            <td><a href="reject_candidate.php"><button class="del_btn">Reject</button></a></td>  
         </tr>  
 
         <tr>        
@@ -105,8 +105,8 @@
             <td>${monthly_income}</td>
             <td>${net_worth}</td>
             <td>${criminal_record}</td>         
-            <td><a href="approve_candidate.html"><button class="approve_btn">Approve</button></a></td>  
-            <td><a href="reject_candidate.html"><button class="del_btn">Reject</button></a></td>  
+            <td><a href="approve_candidate.php"><button class="approve_btn">Approve</button></a></td>  
+            <td><a href="reject_candidate.php"><button class="del_btn">Reject</button></a></td>  
         </tr>  
     </table>
 </div>

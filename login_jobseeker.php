@@ -13,7 +13,7 @@
 
 <body onload="hide()">
 
-<form action="profile_voter.html" method="POST">
+<form action="profile_voter.php" method="POST">
 
 <div align="center">
 
@@ -21,7 +21,7 @@
 
 	<tr>
 
-		<td><center><a href="index.html"><img src="images/logo3.png" height=50/></a></center></td>
+		<td><center><a href="index.php"><img src="images/logo3.png" height=50/></a></center></td>
 
 	</tr>
 
@@ -88,7 +88,7 @@
 
 		<td><br/><br/>
 
-		<h4 style="float:right">Not a member yet? <a href="register_voter.html">REGISTER</a></h4>
+		<h4 style="float:right">Not a member yet? <a href="register_voter.php">REGISTER</a></h4>
 
 		</td>
 

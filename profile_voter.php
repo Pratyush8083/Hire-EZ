@@ -21,10 +21,10 @@
       <div class="button" tabindex="0"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
       <div id="nav-content" tabindex="0">
         <ul>
-          <li><a href="forum_voter.html">Manage Your Profile</a></li>
-          <li><a href="vote.html" style="color:green;">View Job Post</a></li>
-          <li><a href="my_application.html">My Application(s)</a></li>
-          <li><a href="logout.html" style="color:red;">LOGOUT</a></li>
+          <li><a href="forum_voter.php">Manage Your Profile</a></li>
+          <li><a href="vote.php" style="color:green;">View Job Post</a></li>
+          <li><a href="my_application.php">My Application(s)</a></li>
+          <li><a href="logout.php" style="color:red;">LOGOUT</a></li>
         </ul>
       </div>
       <div class="cardDivision col-7">

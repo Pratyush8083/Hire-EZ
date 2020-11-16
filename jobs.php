@@ -27,7 +27,7 @@
     </div>
 </nav>
 
-<form action="thank_you.html" method="POST">
+<form action="thank_you.php" method="POST">
 
 <div align="center">
 

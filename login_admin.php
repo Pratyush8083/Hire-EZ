@@ -12,12 +12,12 @@
 
 <body>
 	<div align="center">
-		<form action="dashboard_admin.html" method="POST">
+		<form action="dashboard_admin.php" method="POST">
 			<table class="form_tab">
 				<tr>
 					<td>
 						<center>
-							<a href="index.html"><img src="images/logo3.png" height=50/></a>
+							<a href="index.php"><img src="images/logo3.png" height=50/></a>
 						</center>
 					</td>
 				</tr>
