@@ -44,7 +44,7 @@
 
 		<td><br/>
 
-		<a href="logout.html"><img src="images/logout.jpg" height=25></a> 
+		<a href="logout.php"><img src="images/logout.jpg" height=25></a> 
 
 		</td>
 

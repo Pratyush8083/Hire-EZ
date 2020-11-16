@@ -45,8 +45,8 @@
 	
 	<tr>
 		<td>
-			<a href="profile_voter.html" class="up_btn" style="margin-left:77%;">BACK TO PROFILE</a>		
-			<a href="logout.html" class="up_btn">EDIT</a>
+			<a href="profile_voter.php" class="up_btn" style="margin-left:77%;">BACK TO PROFILE</a>		
+			<a href="logout.php" class="up_btn">EDIT</a>
 		</td>
 	</tr>
 
@@ -113,7 +113,7 @@
 	
 	<tr>
 		<td>
-			<a href="profile_voter.html" class="up_btn" style="margin-left:77%;">Add</a>
+			<a href="profile_voter.php" class="up_btn" style="margin-left:77%;">Add</a>
 		</td>
 	</tr>
 

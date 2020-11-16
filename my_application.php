@@ -34,7 +34,7 @@
     
     <tr>
         <td>
-            <br/><a href="profile_voter.html" class="up_btn" style="margin-left:85%;">BACK TO PROFILE</a> <br/><br/>
+            <br/><a href="profile_voter.php" class="up_btn" style="margin-left:85%;">BACK TO PROFILE</a> <br/><br/>
         </td>
     </tr>
 </table>

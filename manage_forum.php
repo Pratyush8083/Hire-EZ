@@ -45,8 +45,8 @@
   
   <tr>
     <td>
-      <a href="dashboard_field_officer.html" class="up_btn" style="margin-left:70%;">BACK TO DASHBOARD</a>    
-      <a href="logout.html" class="up_btn">LOGOUT</a>
+      <a href="dashboard_field_officer.php" class="up_btn" style="margin-left:70%;">BACK TO DASHBOARD</a>    
+      <a href="logout.php" class="up_btn">LOGOUT</a>
     </td>
   </tr>
 
@@ -61,8 +61,8 @@
   </tr>
   <tr>
     <td>
-      <a href="view_delete_comments.html"><button class="green_btn">View Comments</button></a>
-      <a href="delete_post.html"><button class="red_btn">Delete Post</button></a>
+      <a href="view_delete_comments.php"><button class="green_btn">View Comments</button></a>
+      <a href="delete_post.php"><button class="red_btn">Delete Post</button></a>
     </td>
   </tr>
 
@@ -73,9 +73,9 @@
   </tr>
   <tr>
     <td>
-      <a href="view_comments.html"><button class="green_btn">View Comments</button></a>
+      <a href="view_comments.php"><button class="green_btn">View Comments</button></a>
     
-      <a href="delete_post.html"><button class="red_btn">Delete Post</button></a>
+      <a href="delete_post.php"><button class="red_btn">Delete Post</button></a>
     </td>
   </tr>
 
@@ -86,9 +86,9 @@
   </tr>
   <tr>
     <td>
-      <a href="view_comments.html"><button class="green_btn">View Comments</button></a>
+      <a href="view_comments.php"><button class="green_btn">View Comments</button></a>
     
-      <a href="delete_post.html"><button class="red_btn">Delete Post</button></a>
+      <a href="delete_post.php"><button class="red_btn">Delete Post</button></a>
     </td>
   </tr>
   

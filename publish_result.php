@@ -31,8 +31,8 @@
   <tr>
     <td>
       <br/>
-            <a href="dashboard_admin.html" class="up_btn" style="margin-left:72%;">BACK TO DASHBOARD</a>       
-            <a href="logout.html" class="up_btn">LOGOUT</a>
+            <a href="dashboard_admin.php" class="up_btn" style="margin-left:72%;">BACK TO DASHBOARD</a>       
+            <a href="logout.php" class="up_btn">LOGOUT</a>
     </td>
 </tr>
 
@@ -41,7 +41,7 @@
   <td>
     <div class="card">
         <div class="card-body">
-          <form action="publish_result.html" method="POST">
+          <form action="publish_result.php" method="POST">
             <p class="card-text"><h5>Please select election name to <font style="color:green;">PUBLISH RESULTS</font>:</h5></p>
             <select name="election_name" id="election_name" style="margin-left: 5%; width:90%; font-size: 20px" required>
               <option hidden disabled selected value> -- select an option -- </option>

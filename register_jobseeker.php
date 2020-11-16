@@ -1,3 +1,11 @@
+<?php
+
+	ob_start();
+
+	session_start();
+
+?>
+
 <!DOCTYPE HTML>
 
 <html>
@@ -31,40 +39,40 @@
 
 <body>
 <div align="center" id="main_form">	
-	<form action="welcome.html" method="POST">
+	<form action="welcome.php" method="POST">
 	<table class="form_tab">
 	<tr>
-		<td><center><a href="index.html"><img src="images/logo3.png" height=50/></a></center></td>
+		<td colspan=5><center><a href="index.php"><img src="images/logo3.png" height=50/></a></center></td>
 	</tr>
 	
 	<tr>
-		<td>
+		<td colspan=5>
 			<center><h3>JOBSEEKER REGISTRATION</h3></center>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
+		<td colspan=5>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
 		<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
-		<span class="floating-label">Your Name</span><br/>
+		<span class="floating-label">Name</span><br/>
 		</div>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
+		<td colspan=5>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-calendar" style="font-size:20px;"></i>
 		<input type="text" name="dob" id="dob" autocomplete="off" class="inputText" required/>
-		<span class="floating-label">Your D.O.B.</span><br/>
+		<span class="floating-label">Date of Birth</span><br/>
 		</div>
 		</td>
 	</tr>
 	
 	<tr>
-		<td>
+		<td colspan=5>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
 		<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
@@ -74,58 +82,46 @@
 	</tr>
 
 	<tr>
-		<td>
+		<td colspan=5>
 		<div class="user-input-wrp"><br/>
-		<i class="fa fa-envelope-o" style="font-size:20px;"></></i>
+		<i class="fa fa-envelope-o" style="font-size:20px;"></i>
 		<input type="email" name="email" id="email" autocomplete="off" class="inputText" required/>
-		<span class="floating-label">Your E-mail</span><br/>
+		<span class="floating-label">E-mail Address</span><br/>
 		<p id="msg" style="font-size:14px;color:red;margin-left:10%;"></p>
 		</div>
 		</td>
 	</tr>
 	
 	<tr>
+		<td><u><h4>Communication Address</h4></u></td>
 		<td>
-		<div class="user-input-wrp"><br/>
-		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
-		<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
-		<span class="floating-label">Street</span><br/>
-		</div>
+			<div class="user-input-wrp"><br/>
+			<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+			<span class="floating-label">Street</span><br/>
+			</div>
 		</td>
-	</tr>
-	
-	<tr>
 		<td>
-		<div class="user-input-wrp"><br/>
-		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
-		<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
-		<span class="floating-label">City</span><br/>
-		</div>
+			<div class="user-input-wrp"><br/>
+			<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+			<span class="floating-label">City</span><br/>
+			</div>
 		</td>
-	</tr>
-	
-	<tr>
 		<td>
-		<div class="user-input-wrp"><br/>
-		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
-		<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
-		<span class="floating-label">State</span><br/>
-		</div>
+			<div class="user-input-wrp"><br/>
+			<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+			<span class="floating-label">State</span><br/>
+			</div>
 		</td>
-	</tr>
-	
-	<tr>
 		<td>
-		<div class="user-input-wrp"><br/>
-		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
-		<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
-		<span class="floating-label">Country</span><br/>
-		</div>
+			<div class="user-input-wrp"><br/>
+			<input type="text" name="username" id="username" autocomplete="off" class="inputText" required/>
+			<span class="floating-label">Country</span><br/>
+			</div>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
+		<td colspan=5>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-key" style="font-size:20px;"></></i>
 		<input type="password" name="password" id="password" autocomplete="off" class="inputText" required/>
@@ -192,24 +188,87 @@
   </script>
 
 	<tr>
-		<td><br/>
+		<td colspan=5><br/>
 		<button type="submit" class="btn" name="continue" id="continue" onclick="show_spin()"><p id="spin" style="display:none;">
 		<i class="fa fa-spinner fa-spin" style="font-size:22px"></i></p> REGISTER</button>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
-		<br/><b style="float:right">Already a member? <a href="login_voter.html">LOG IN</a></b>
+		<td colspan=5>
+		<br/><b style="float:right">Already a member? <a href="login_jobseeker.php">LOG IN</a></b>
 		</td>
 	</tr>
 	</table>
 	</form>
 </div>
 
-
-
 </body>
 
 </html>
 
+<?php  
+
+include("db_connection.php");
+if(isset($_POST['continue']))  
+
+{  
+
+    $username=$_POST['username'];
+
+    $email=$_POST['email'];  
+
+	$password=$_POST['password'];
+
+	$password2=$_POST['password_2']; 
+
+	$sql="select * from users WHERE email=?";
+
+	$stmt = $conn->prepare($sql);
+
+	$stmt->bind_param("s", $email);
+
+	$stmt->execute();
+
+	$result = $stmt->get_result();
+
+	if ($result->num_rows > 0) 
+
+	{ ?>
+
+        <script>
+
+			document.getElementById('msg').innerHTML = "E-mail already exists!!";
+
+		</script>";
+
+	<?php }
+
+	else
+
+	{  
+
+	$enc_psw = password_hash($password, PASSWORD_DEFAULT);
+
+    $insert_user="insert into users (username,password,email) VALUES (?,?,?)";  
+
+    $stmt = $conn->prepare($insert_user);
+
+	$stmt->bind_param("sss", $username, $enc_psw, $email);
+
+	if($stmt->execute())  
+
+    {  
+
+		$_SESSION["username"] = $username;
+
+		$_SESSION["email"] = $email;
+
+		$_SESSION["password"] = $password;
+
+        header("Location: upload.php");
+
+    }  	
+	} 
+}
+?>  

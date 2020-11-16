@@ -21,9 +21,9 @@
       <div class="button" tabindex="0"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
       <div id="nav-content" tabindex="0">
         <ul>
-          <li><a href="forum_candidate.html">GO TO FORUM</a></li>
+          <li><a href="forum_candidate.php">GO TO FORUM</a></li>
           <!-- <li><a href="#0">SEND MAIL TO VOTERS</a></li> -->
-          <li><a href="logout.html" style="color:red;">LOGOUT</a></li>
+          <li><a href="logout.php" style="color:red;">LOGOUT</a></li>
         </ul>
       </div>
       <div class="cardDivision col-7">

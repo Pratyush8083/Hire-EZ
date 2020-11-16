@@ -45,9 +45,9 @@
 	
 	<tr>
 		<td>
-			<a href="create_post.html" class="up_btn">CREATE POST</a>
-			<a href="profile_candidate.html" class="up_btn" style="margin-left:65%;">BACK TO PROFILE</a>		
-			<a href="logout.html" class="up_btn">LOGOUT</a>
+			<a href="create_post.php" class="up_btn">CREATE POST</a>
+			<a href="profile_candidate.php" class="up_btn" style="margin-left:65%;">BACK TO PROFILE</a>		
+			<a href="logout.php" class="up_btn">LOGOUT</a>
 		</td>
 	</tr>
 
@@ -62,8 +62,8 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="view_comments.html"><button class="green_btn">View Comments</button></a>
-			<a href="delete_post.html"><button class="red_btn">Delete Post</button></a>
+			<a href="view_comments.php"><button class="green_btn">View Comments</button></a>
+			<a href="delete_post.php"><button class="red_btn">Delete Post</button></a>
 		</td>
 	</tr>
 
@@ -74,9 +74,9 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="view_comments.html"><button class="green_btn">View Comments</button></a>
+			<a href="view_comments.php"><button class="green_btn">View Comments</button></a>
 		
-			<a href="delete_post.html"><button class="red_btn">Delete Post</button></a>
+			<a href="delete_post.php"><button class="red_btn">Delete Post</button></a>
 		</td>
 	</tr>
 
@@ -87,9 +87,9 @@
 	</tr>
 	<tr>
 		<td>
-			<a href="view_comments.html"><button class="green_btn">View Comments</button></a>
+			<a href="view_comments.php"><button class="green_btn">View Comments</button></a>
 		
-			<a href="delete_post.html"><button class="red_btn">Delete Post</button></a>
+			<a href="delete_post.php"><button class="red_btn">Delete Post</button></a>
 		</td>
 	</tr>
 	

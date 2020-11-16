@@ -31,10 +31,10 @@
 
 <body>
 <div align="center" id="main_form">	
-	<form action="welcome.html" method="POST">
+	<form action="welcome.php" method="POST">
 	<table class="form_tab">
 	<tr>
-		<td><center><a href="index.html"><img src="images/logo3.png" height=50/></a></center></td>
+		<td><center><a href="index.php"><img src="images/logo3.png" height=50/></a></center></td>
 	</tr>
 	
 	<tr>
@@ -186,7 +186,7 @@
 
 	<tr>
 		<td>
-		<br/><b style="float:right">Already a member? <a href="login_candidate.html">LOG IN</a></b>
+		<br/><b style="float:right">Already a member? <a href="login_candidate.php">LOG IN</a></b>
 		</td>
 	</tr>
 	</table>

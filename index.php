@@ -15,7 +15,7 @@
 	<form>
 		<table class="form_tab" style="text-align:center;">
 			<tr>
-				<td colspan=2><center><a href="index.html"><img src="images/logo3.png" height=50/></a></center></td>
+				<td colspan=2><center><a href="index.php"><img src="images/logo3.png" height=50/></a></center></td>
 			</tr>
 			<tr><td colspan=2><h3>HireEZ – Smart Remote Hiring Application</h3><br/><br/></td></tr>
 
@@ -25,20 +25,20 @@
 			</tr>
 
 			<tr>
-				<td><button type="button" onclick = "window.location.href='register_voter.html'" class="up_btn">JobSeeker</button></td>
-				<td><button type="button" onclick = "window.location.href='login_voter.html'" class="up_btn">JobSeeker</button></td>
+				<td><button type="button" onclick = "window.location.href='register_jobseeker.php'" class="up_btn">JobSeeker</button></td>
+				<td><button type="button" onclick = "window.location.href='login_jobseeker.php'" class="up_btn">JobSeeker</button></td>
 			</tr>
 
 			<tr>
-				<td><button type="button" onclick = "window.location.href='register_candidate.html'" class="up_btn">Employer</button></td>
-				<td><button type="button" onclick = "window.location.href='login_candidate.html'" class="up_btn">Employer</button></td>
+				<td><button type="button" onclick = "window.location.href='register_employer.php'" class="up_btn">Employer</button></td>
+				<td><button type="button" onclick = "window.location.href='login_employer.php'" class="up_btn">Employer</button></td>
 				
 			</tr>
 			<tr>
 				<td colspan=2><hr/><br/><h4><font style="color:red">ADMIN PANEL</font></h4><br/></td></tr>
 			<tr>
 				<td colspan=2>
-				<button type="button" onclick = "window.location.href='login_admin.html'" class="up_btn">ADMIN LOGIN</td>
+				<button type="button" onclick = "window.location.href='login_admin.php'" class="up_btn">ADMIN LOGIN</td>
 			</tr>
 			
 		</table>
