@@ -1,3 +1,8 @@
+<?php
+	ob_start();
+	session_start();
+?>
+
 <!DOCTYPE HTML>
 
 <html>
@@ -24,6 +29,20 @@
           clickInput: true,
         });
       });
+
+	  function show_com()
+		{
+			document.getElementById('reg_div').style.display="block";
+			document.getElementById('site_div').style.display="block";
+			document.getElementById('ssn_div').style.display="none";
+		}
+
+		function show_ind()
+		{
+			document.getElementById('ssn_div').style.display="block";
+			document.getElementById('reg_div').style.display="none";
+			document.getElementById('site_div').style.display="none";
+		}
 	</script>
 
 	<title>Employer Registration</title>
@@ -31,30 +50,41 @@
 
 <body>
 <div align="center" id="main_form">	
-	<form action="welcome.php" method="POST">
+	<form action="register_employer.php" method="POST">
 	<table class="form_tab">
 	<tr>
-		<td><center><a href="index.php"><img src="images/logo3.png" height=50/></a></center></td>
+		<td colspan=3><center><a href="index.php"><img src="images/logo3.png" height=50/></a></center></td>
 	</tr>
 	
 	<tr>
-		<td>
+		<td colspan=3>
 			<center><h3>EMPLOYER REGISTRATION</h3></center>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
+		<td colspan=3>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
-		<input type="text" name="username" id="username" class="inputText" autocomplete="off" required/>
+		<input type="text" name="cname" id="cname" class="inputText" autocomplete="off" required/>
 		<span class="floating-label">Company Name</span><br/>
 		</div>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
+		<td colspan=5>
+		<div class="user-input-wrp"><br/>
+		<i class="fa fa-envelope-o" style="font-size:20px;"></i>
+		<input type="email" name="email" id="email" autocomplete="off" class="inputText" required/>
+		<span class="floating-label">E-mail Address</span><br/>
+		<p id="msg" style="font-size:14px;color:red;margin-left:10%;"></p>
+		</div>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan=3>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-money" style="font-size:20px;"></i>
 		<input type="text" name="desc" id="desc" class="inputText" autocomplete="off" required/>
@@ -64,55 +94,51 @@
 	</tr>
 	
 	<tr>
-		<td>
+		<td colspan=3>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="desc" id="desc" class="inputText" autocomplete="off" required/>
-		<span class="floating-label">Company Address</span><br/>
+		<input type="text" name="address" id="address" class="inputText" autocomplete="off" required/>
+		<span class="floating-label">Company Address</span><br/><br/><br/>
 		</div>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
-		<div class="user-input-wrp"><br/>
-		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="income" id="income" class="inputText" autocomplete="off" required/>
-		<span class="floating-label">Employer Type</span><br/>
-		</div>
-		</td>
+	<td><u><h4>Employer Type</h4></u></td>
+		<td><input type="radio" name="e_type" value="company" onchange="show_com()" required>&nbsp Company Employer</td>
+		<td><input type="radio" name="e_type" value="individual" onchange="show_ind()" required>&nbsp Individual Employer</td>
 	</tr>
 
 	<tr>
-		<td>
-		<div class="user-input-wrp"><br/>
+		<td colspan=3>
+		<div id="reg_div" class="user-input-wrp" style="display:none"><br/>
 		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="worth" id="worth" class="inputText" autocomplete="off" required/>
-		<span class="floating-label">Registration number</span><br/>/div>
+		<input type="text" name="reg" id="reg" class="inputText" autocomplete="off"/>
+		<span class="floating-label">Registration number</span><br/></div>
 		</td>
 	</tr>
 	
 	<tr>
-		<td>
-		<div class="user-input-wrp"><br/>
+		<td colspan=3>
+		<div id="site_div" class="user-input-wrp" style="display:none"><br/>
 		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="worth" id="worth" class="inputText" autocomplete="off" required/>
-		<span class="floating-label">Website</span><br/>/div>
+		<input type="text" name="site" id="site" class="inputText" autocomplete="off"/>
+		<span class="floating-label">Website</span><br/></div>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
-		<div class="user-input-wrp"><br/>
+		<td colspan=3>
+		<div id="ssn_div" class="user-input-wrp" style="display:none"><br/>
 		<i class="fa fa-users" style="font-size:20px;"></i>
-		<input type="text" name="partyname" id="partyname" class="inputText" autocomplete="off" required/>
+		<input type="text" name="ssn" id="ssn" class="inputText" autocomplete="off"/>
 		<span class="floating-label">SSN</span><br/>
 		</div>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
+		<td colspan=3>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-key" style="font-size:20px;"></></i>
 		<input type="password" name="password" id="password" autocomplete="off" class="inputText" autocomplete="off" required/>
@@ -179,13 +205,13 @@
   </script>
 
 	<tr>
-		<td><br/>
+		<td colspan=3><br/>
 		<button type="submit" class="btn" name="continue" id="continue"></p> REGISTER</button>
 		</td>
 	</tr>
 
 	<tr>
-		<td>
+		<td colspan=3>
 		<br/><b style="float:right">Already a member? <a href="login_candidate.php">LOG IN</a></b>
 		</td>
 	</tr>
@@ -197,3 +223,70 @@
 
 </html>
 
+<?php  
+include("db_connection.php");
+if(isset($_POST['continue']))  
+{  
+
+	$cname=$_POST['cname'];
+	$email=$_POST['email'];
+	$desc=$_POST['desc'];       
+	$address=$_POST['address'];
+	$e_type=$_POST['e_type'];  
+	$reg=$_POST['reg'];  
+	$site=$_POST['site'];  
+	$ssn=$_POST['ssn']; 
+	$password=$_POST['password'];
+
+	$sql="select * from employer WHERE email=?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("s", $email);
+	$stmt->execute();
+	$result = $stmt->get_result();
+
+	if ($result->num_rows > 0) 
+	{ ?>
+        <script>
+			document.getElementById('msg').innerHTML = "E-mail already exists!!";
+		</script>";
+	<?php }
+	else
+	{  
+	$enc_psw = password_hash($password, PASSWORD_DEFAULT);
+    $insert_user="insert into employer (name,email,description,address,employer_type,password) VALUES (?,?,?,?,?,?)";  
+    $stmt = $conn->prepare($insert_user);
+	$stmt->bind_param("ssssss", $cname, $email, $desc, $address, $e_type, $enc_psw);
+
+	$inserted = $stmt->execute();
+
+	$sql="select eid,employer_type from employer WHERE email=?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("s", $email);
+	$stmt->execute();
+	$result = $stmt->get_result();
+
+	$row = $result->fetch_assoc();
+	$eid = $row['eid'];
+	$type = $row['employer_type'];
+	if($type == "company")
+	{
+		$insert_user="insert into company_employer (eid,reg_no,website) VALUES (?,?,?)";  
+		$stmt = $conn->prepare($insert_user);
+		$stmt->bind_param("sss", $eid, $reg, $site);
+		$stmt->execute();
+	}
+	else
+	{
+		$insert_user="insert into individual_employer (eid,ssn) VALUES (?,?)";  
+		$stmt = $conn->prepare($insert_user);
+		$stmt->bind_param("ss", $eid, $ssn);
+		$stmt->execute();
+	}
+	ob_end_flush();
+	if($inserted){
+		$_SESSION["username"] = $cname;
+    	echo "<script>window.location.href='welcome.php'</script>";
+	}
+	}
+}
+?>
