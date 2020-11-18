@@ -1,5 +1,4 @@
 <?php
-	ob_start();
 	session_start();
 ?>
 
@@ -77,3 +76,6 @@
 </div>
 </body>   
 </html>
+<?php
+session_destroy();
+?>

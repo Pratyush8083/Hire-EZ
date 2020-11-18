@@ -1,3 +1,8 @@
+<?php
+	session_start();
+?>
+
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -13,7 +18,7 @@
 
 <body onload="hide()">
 
-<form action="profile_voter.php" method="POST">
+<form action="login_jobseeker.php" method="POST">
 
 <div align="center">
 
@@ -39,7 +44,7 @@
 		<td><p id="msg" style="font-size:15px;color:red;margin-left:10%;"></p>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-address-card-o" style="font-size:20px;"></i>
-		<input type="text" name="v_id" class="inputText" id="v_id" required autocomplete="off"/>
+		<input type="text" name="email" class="inputText" id="email" required autocomplete="off"/>
 		<span class="floating-label">Email</span><br/>
 		</div>
 		</td>
@@ -49,7 +54,7 @@
 		<td>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-lock" style="font-size:20px;"></i>
-		<input type="password" name="password" id="psw" class="inputText" required autocomplete="off"/>
+		<input type="password" name="password" id="password" class="inputText" required autocomplete="off"/>
 		<span class="floating-label">Password</span><br/>
 		</div>
 		</td>
@@ -88,7 +93,7 @@
 
 		<td><br/><br/>
 
-		<h4 style="float:right">Not a member yet? <a href="register_voter.php">REGISTER</a></h4>
+		<h4 style="float:right">Not a member yet? <a href="register_jobseeker.php">REGISTER</a></h4>
 
 		</td>
 
@@ -103,3 +108,39 @@
 </body>
 
 </html>
+
+<?php  
+  
+include("db_connection.php");  
+  
+if(isset($_POST['login']))  
+{  
+	$email = $_POST['email'];
+    $password = $_POST['password']; 
+	$sql = "select password from job_seeker WHERE email = ?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("s", $email);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	$hash = "";
+	if($res->num_rows > 0)
+	{
+		while($row = $res->fetch_assoc())
+		{
+			$hash = $row['password'];
+		}
+	}
+	$verify = password_verify($password, $hash);
+	if($verify == 1)
+	{   
+		$_SESSION["email"] = $email;
+    	echo "<script>window.location.href='profile_jobseeker.php'</script>";
+    }  
+    else  
+    {  
+    ?>
+    <script>document.getElementById('msg').innerHTML = "Incorrect Password. Try again!"; </script>
+    <?php 
+	}  
+}  
+?>

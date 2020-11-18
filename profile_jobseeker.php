@@ -1,3 +1,23 @@
+<?php
+session_start();  
+if(!$_SESSION['email'])  
+{  
+      header("Location: login_jobseeker.php");//redirect to login page to secure the welcome page without login access.  
+}
+
+include("db_connection.php");  
+
+  $sql = "select jid,name,dob,phone_no,email,street,city,state,country from job_seeker WHERE email = ?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("s", $_SESSION['email']);
+	$stmt->execute();
+  $result = $stmt->get_result();
+  $row = $result->fetch_assoc();
+  
+  $_SESSION["jid"] = $row['jid'];
+?> 
+
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -15,13 +35,13 @@
 
 <body>
   <div class="page">
-    <header tabindex="0">JobSeeker Profile</header>
+    <header tabindex="0">WELCOME <?php echo $row['name'];?></header>
     <div id="nav-container">
       <div class="bg"></div>
       <div class="button" tabindex="0"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
       <div id="nav-content" tabindex="0">
         <ul>
-          <li><a href="forum_voter.php">Manage Your Profile</a></li>
+          <li><a href="manage_jobseeker_profile.php">Manage Profile</a></li>
           <li><a href="vote.php" style="color:green;">View Job Post</a></li>
           <li><a href="my_application.php">My Application(s)</a></li>
           <li><a href="logout.php" style="color:red;">LOGOUT</a></li>
@@ -32,12 +52,13 @@
           <br> <img class="card-img-top" src="https://picsum.photos/200/150/?random">
           <br>
           <div class="card-block">
-            <center>
-              <h4 class="card-title">${Name}</h4></center>
             <div class="card-text">
-              <p>Date of Birth : ${DOB}</p>
-              <p>Email : ${Email}</p>
-              <p>Address : ${Address}</p>
+              <p>Date of Birth : <?php echo $row['dob'];?></p>
+              <p>Email : <?php echo $row['email'];?></p>
+              <p>Street : <?php echo $row['street'];?></p>
+              <p>City : <?php echo $row['city'];?></p>
+              <p>State : <?php echo $row['state'];?></p>
+              <p>Country : <?php echo $row['country'];?></p>
             </div>
           </div>
         </div>
