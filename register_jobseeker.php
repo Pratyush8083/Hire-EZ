@@ -157,7 +157,7 @@
 	    }
 
 	    if (password.length < 8) {
-	      display.innerHTML = "At least 8 characters, Mixture of uppercase, lowercase letters, numbers and at least one special character, e.g., $@#&!. Do not use < or >";
+	      display.innerHTML = "Password should contain mixture of uppercase, lowercase letters, numbers and at least one special character, e.g., $@#&!. Do not use < or >";
 	    }
 
 	    switch (strength) {
