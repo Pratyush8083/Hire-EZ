@@ -7,25 +7,19 @@ if(!$_SESSION['email'])
 
 include("db_connection.php");  
 
- 	$jid = $_SESSION['jid'];
-
-	$sql = "select title, marks_ob, file from qualification_documents WHERE jid = ?";
+	$jid = $_SESSION['jid'];
+	$sql = "select profession_type from job_seeker WHERE jid = ?";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param("s", $jid);
+	$stmt->bind_param("i", $jid);
 	$stmt->execute();
   	$result = $stmt->get_result();
-	$row = $result->fetch_assoc();
-	if ($result->num_rows == 0)  {
-		$title = "";
-		$marks_ob = "";
-	} else {	
-		$title = $row['title'];	
-		$marks_ob = $row['marks_ob'];
-	}
+	$job_seeker = $result->fetch_assoc();
+
+	$p_type=$job_seeker['profession_type'];	
 
 	$sql1 = "select pcid, work_description, start_date, end_date from worked_for WHERE jid = ?";
 	$stmt1 = $conn->prepare($sql1);
-	$stmt1->bind_param("s", $jid);
+	$stmt1->bind_param("i", $jid);
 	$stmt1->execute();
   	$result1 = $stmt1->get_result();
 	$worked_for = $result1->fetch_assoc();
@@ -44,7 +38,7 @@ include("db_connection.php");
 
 	$sql2 = "select current_company, current_company_start_date from professional WHERE jid = ?";
 	$stmt2 = $conn->prepare($sql2);
-	$stmt2->bind_param("s", $jid);
+	$stmt2->bind_param("i", $jid);
 	$stmt2->execute();
   	$result2 = $stmt2->get_result();
 	$professional = $result2->fetch_assoc();
@@ -59,7 +53,7 @@ include("db_connection.php");
 
 	$sql3 = "select name, type, reg_no from prev_companies WHERE pcid = ?";
 	$stmt3 = $conn->prepare($sql3);
-	$stmt3->bind_param("s", $pcid);
+	$stmt3->bind_param("i", $pcid);
 	$stmt3->execute();
   	$result3 = $stmt3->get_result();
 	$prev_companies = $result3->fetch_assoc();
@@ -72,6 +66,49 @@ include("db_connection.php");
 		$name = $prev_companies['name'];	
 		$type = $prev_companies['type'];
 		$reg_no = $prev_companies['reg_no'];
+	}
+
+	$sql4 = "select experience from freelancer WHERE jid = ?";
+	$stmt4 = $conn->prepare($sql4);
+	$stmt4->bind_param("i", $jid);
+	$stmt4->execute();
+  	$result4 = $stmt4->get_result();
+	$freelancer = $result4->fetch_assoc();
+
+	if ($result4->num_rows == 0)  {
+		$exp = "";
+	} else {	
+		$exp = $freelancer['experience'];
+	}
+
+	$sql5 = "select name,description,pid from projects WHERE jid = ?";
+	$stmt5 = $conn->prepare($sql5);
+	$stmt5->bind_param("i", $jid);
+	$stmt5->execute();
+  	$result5 = $stmt5->get_result();
+	$projects = $result5->fetch_assoc();
+
+	if ($result5->num_rows == 0)  {
+		$p_name = "";
+		$p_desc = "";
+		$pid = "";
+	} else {	
+		$p_name = $projects['name'];
+		$p_desc = $projects['description'];
+		$pid = $projects['pid'];
+	}
+
+	$sql6 = "select reference_link from project_references WHERE pid = ?";
+	$stmt6 = $conn->prepare($sql6);
+	$stmt6->bind_param("i", $pid);
+	$stmt6->execute();
+  	$result6 = $stmt6->get_result();
+	$project_references = $result6->fetch_assoc();
+
+	if ($result6->num_rows == 0)  {
+		$p_ref_link = "";
+	} else {	
+		$p_ref_link = $project_references['reference_link'];
 	}
 
 ?> 
@@ -132,121 +169,26 @@ include("db_connection.php");
 		}
 	</script>
 
-<title>MANAGE PROFILE</title>
+<title>MANAGE WORK EXPERIENCE</title>
 </head>
 
 <body>
+
 <nav class="navbar navbar-expand-md navbar-light bg-light">
 <div>    
-	<center><p class="header_text">MANAGE PROFILE</p></center>
+	<center><p class="header_text">Manage Work Experience</p></center>
 </div>
 </nav>
 
-<div align="center" id="main_form">	
-	<form action="manage_jobseeker_profile.php" method="POST" enctype="multipart/form-data">
+
+<div align="center" id="prof_div" style="display:none">
+	<form action="manage_jobseeker_exp.php" method="POST">
 	<table class="form_tab">
-	
 	<tr>
-		<td colspan=3>
+		<td colspan=2>
 			<a href="profile_jobseeker.php" class="up_btn" style="margin-left:77%;">BACK TO PROFILE</a>	
 		</td>
 	</tr>
-
-	<tr>
-		<td colspan=3><hr/><h4>My Qualifications:</h4></td>
-	</tr>
-
-	<tr>
-		<td colspan=3>
-		<div class="user-input-wrp"><br/>
-		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="qual" id="qual" class="inputText" value="<?php echo $title ?>"/>
-		<span class="floating-label">Highest qualification</span><br/></div>
-		</td>
-	</tr>
-
-	<tr>
-		<td colspan=3>
-		<div class="user-input-wrp"><br/>
-		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="perc" id="perc" class="inputText" value="<?php echo $marks_ob ?>"autocomplete="off"/>
-		<span class="floating-label">Percentage Obtained</span><br/></div>
-		</td>
-	</tr>
-		
-	<tr>
-		<td>
-		<img src="<?php echo "uploads/".$row['file'] ?>" alt="Qualification Doc" width="120" height="120" style="float:right">
-		</td>
-		<td>
-		<div class="user-input-wrp"><br/>
-		<i class="fa fa-picture-o" style="font-size:20px;"></></i>
-		<div style="background:skyblue;width:300px;padding:10px;margin-left: 10%;">
-			<input type="file" name="file" accept="image/*" capture="camera"/>
-		</div>
-		<span class="floating-label">Upload certificate (image only)</span><br/>
-		<p id="msg" style="font-size:14px;color:red;margin-left:10%;"></p>
-		</div>
-		</td>
-
-		<td><br/><button type="submit" class="up_btn" name="upload_btn" onclick="show_spin()"><p id="spin" style="display:none;">
-
-		<i class="fa fa-spinner fa-spin" style="font-size:18px;font-color:red"></i></p> UPLOAD</button></td>
-	</tr>
-
-
-	<?php
-		if(isset($_POST['upload_btn']))
-
-		{
-			$title = $_POST['qual'];
-			$marks_ob = $_POST['perc'];
-			$fileName = $_FILES['file']['name'];		
-			$fileTmpName = $_FILES['file']['tmp_name'];		
-			$fileExt = explode('.', $fileName);		
-			$fileActualExt = strtolower(end($fileExt));		
-			$allowed = array('jpg','jpeg','png');		
-			if(in_array($fileActualExt, $allowed))		
-			{			
-				$fileNameNew = uniqid('',true).".".$fileActualExt;
-		
-				$fileDestination = 'uploads/'.$fileNameNew;
-			}
-			include("db_connection.php");
-
-			$image = $fileNameNew;
-			$email = $_SESSION["email"];
-
-			if ($result->num_rows > 0)  {
-				$sql = "update qualification_documents set title =?, marks_ob= ?, file = ? WHERE jid = ?";
-			} else {	
-				$sql = "insert into qualification_documents (title,marks_ob,file, jid) VALUES (?,?,?,?)";
-			}		
-			$stmt = $conn->prepare($sql);
-			$stmt->bind_param("sdsi",  $title, $marks_ob, $image, $jid);
-			$stmt->execute();
-			move_uploaded_file($_FILES['file']['tmp_name'], $fileDestination);
-
-			echo "<script>window.location.href='manage_jobseeker_profile.php'</script>";
-		}
-	?>
-	
-	<tr>
-	</table>
-	</form>
-
-
-	<table class="form_tab">
-	<td><h4>Profession Type</h4></td>
-		<td><input type="radio" name="p_type" value="company" onchange="show_prof()">&nbsp Professional</td>
-		<td><input type="radio" name="p_type" value="individual" onchange="show_free()">&nbsp Freelancer</td>
-	</tr>
-	</table>
-</div>
-
-<div align="center" id="prof_div" style="display:none">
-	<form action="manage_jobseeker_profile.php" method="POST">
-	<table class="form_tab">
 	<tr>
 		<td colspan=3><hr/><h5>Current Company</h5></td>
 	</tr>
@@ -330,57 +272,110 @@ include("db_connection.php");
 		</td>
 	</tr>
 
+	<tr>
+		<td colspan=3><br/>
+		<button type="submit" class="btn" name="save_prof" id="save_prof" onclick="show_spin()"><p id="spin" style="display:none;">
+		<i class="fa fa-spinner fa-spin" style="font-size:22px"></i></p> Save Details</button>
+		</td>
+	</tr>
 	<!-- <tr>
 		<td colspan=3>
 			<a href="profile_voter.php" class="up_btn" style="margin-left:77%;">Add</a>
 		</td>
 	</tr> -->
 	</table>
-	</div>	
-</div>
+	</form>
+	</div>
 
 <div align="center" id="free_div" style="display:none">
+	<form action="manage_jobseeker_exp.php" method="POST">
 	<table class="form_tab">
 	<tr>
-		<td colspan=3><hr/><h4>My Experiences:</h4></td>
+		<td colspan=2>
+			<a href="profile_jobseeker.php" class="up_btn" style="margin-left:77%;">BACK TO PROFILE</a>	
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan=3>
+		<div class="user-input-wrp"><br/>
+		<i class="fa fa-money" style="font-size:20px;"></i>
+		<input type="text" name="exp" id="exp" value="<?php echo $exp; ?>" class="inputText"/>
+		<span class="floating-label">Freelancing Experience (in years)</span><br/></div>
+		</td>
+	</tr>	
+	
+	<tr>
+	<td><h5>Last Project Details</h5></td>
+	</tr>
+	<tr>
+		<td colspan=3>
+		<div class="user-input-wrp"><br/>
+		<i class="fa fa-calendar" style="font-size:20px;"></i>
+		<input type="text" name="p_name" id="p_name" value="<?php echo $p_name; ?>" class="inputText"/>
+		<span class="floating-label">Project Name</span><br/>
+		</div>
+		</td>
 	</tr>
 	
 	<tr>
 		<td colspan=3>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="exp" id="exp" class="inputText" value=""/>
-		<span class="floating-label">Experience (in years)</span><br/></div>
+		<input type="text" name="p_desc" id="p_desc" class="inputText" value="<?php echo $p_desc; ?>"/>
+		<span class="floating-label">Description</span><br/></div>
 		</td>
 	</tr>
-	</table>
-</div>
-<div align="center" id="main_form">
-	<table class="form_tab">
+
+	<tr>
+		<td colspan=3>
+		<div class="user-input-wrp"><br/>
+		<i class="fa fa-money" style="font-size:20px;"></i>
+		<input type="text" name="p_ref_link" id="p_ref_link" class="inputText" value="<?php echo $p_ref_link; ?>"/>
+		<span class="floating-label">Reference Link</span><br/></div>
+		</td>
+	</tr>
 
 	<tr>
 		<td colspan=3><br/>
-		<button type="submit" class="btn" name="save_btn" id="save_btn" onclick="show_spin()"><p id="spin" style="display:none;">
-		<i class="fa fa-spinner fa-spin" style="font-size:22px"></i></p> SAVE PROFILE</button>
+		<button type="submit" class="btn" name="save_free" id="save_free" onclick="show_spin()"><p id="spin" style="display:none;">
+		<i class="fa fa-spinner fa-spin" style="font-size:22px"></i></p> Save Details</button>
 		</td>
 	</tr>
-	
 	</table>
 	</form>
 </div>
-
+	
+<?php
+if($p_type === "professional"){
+	echo "<script>show_prof();</script>";
+}
+else if($p_type === "freelancer"){
+	echo "<script>show_free();</script>";
+}
+else{
+	echo "You cannot add your work experience as you are a fresher!";
+}
+?>
 </body>
 </html>
 
 <?php  
-if(isset($_POST['save_btn'])) 
+if(isset($_POST['save_prof'])) 
 {  
     $current_company=$_POST['curr_company_name'];
 	$current_company_start_date=$_POST['curr_start'];	
-	$sql="insert into professional (jid,current_company,current_company_start_date) VALUES (?,?,?)";
+	$sql="select * from professional WHERE jid=?";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param("iss", $jid, $current_company, $current_company_start_date);
+	$stmt->bind_param("i", $jid);
 	$stmt->execute();
+	$res = $stmt->get_result();
+	if ($res->num_rows == 0)  {
+		$sql="insert into professional (jid,current_company,current_company_start_date) VALUES (?,?,?)";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("iss", $jid, $current_company, $current_company_start_date);
+		$stmt->execute();
+	}	
 
 	$name=$_POST['prev_company_name'];
 	$type=$_POST['company_type'];  
@@ -397,22 +392,76 @@ if(isset($_POST['save_btn']))
 		$stmt->bind_param("ssi",  $name, $type, $reg_no);
 		$stmt->execute();
 	}	
+	$sql="select pcid from prev_companies WHERE name=?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("s", $name);
+	$stmt->execute();
+	$res = $stmt->get_result();
 	$row = $res->fetch_assoc();
 	$pcid = $row['pcid'];
 
 	$work_description=$_POST['work_desc'];  
 	$start_date=$_POST['prev_start'];  
-	$end_date=$_POST['prev_end'];
-	if ($result1->num_rows > 0)  {
-		$sql = "update worked_for set work_description =?, start_date= ?, end_date = ?, jid=? WHERE pcid = ?";
-	} else {	
-		$sql = "insert into worked_for (work_description,start_date,end_date,jid,pcid) VALUES (?,?,?,?,?)";
-	}		
+	$end_date=$_POST['prev_end'];	
+	$sql = "insert into worked_for (work_description,start_date,end_date,jid,pcid) VALUES (?,?,?,?,?)";	
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param("sssii",  $work_description, $start_date, $end_date, $jid, $pcid);
 	$stmt->execute();
 
-	echo "<script>window.location.href='manage_jobseeker_profile.php'</script>";
+	echo "<script>window.location.href='manage_jobseeker_exp.php'</script>";
+}
+
+if(isset($_POST['save_free'])) 
+{  
+
+	$exp = $_POST['exp'];
+	$sql="select * from freelancer WHERE jid=?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("i", $jid);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	if ($res->num_rows == 0)  {
+		$sql="insert into freelancer (jid, experience) VALUES (?,?)";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("ii", $jid, $exp);
+		$stmt->execute();
+	}
+
+	$p_name=$_POST['p_name'];
+	$p_desc=$_POST['p_desc'];	
+	$sql="select * from projects WHERE jid=?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("i", $jid);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	if ($res->num_rows == 0)  {
+		$sql="insert into projects (name,description,jid) VALUES (?,?,?)";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("ssi", $p_name, $p_desc, $jid);
+		$stmt->execute();
+	}	
+
+	$sql="select pid from projects WHERE name=?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("s", $p_name);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	$projects = $res->fetch_assoc();
+
+	$pid = $projects['pid'];
+	$p_ref_link=$_POST['p_ref_link'];
+	$sql="select * from project_references WHERE pid=?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("i", $pid);
+	$stmt->execute();
+	$res = $stmt->get_result();
+	if ($res->num_rows == 0)  {
+		$sql="insert into project_references (pid, reference_link) VALUES (?,?)";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("is", $pid, $p_ref_link);
+		$stmt->execute();
+	}
+	echo "<script>window.location.href='manage_jobseeker_exp.php'</script>";
 }
 ?>  
 

@@ -34,12 +34,6 @@
 				<td><button type="button" onclick = "window.location.href='login_employer.php'" class="up_btn">Employer</button></td>
 				
 			</tr>
-			<tr>
-				<td colspan=2><hr/><br/><h4><font style="color:red">ADMIN PANEL</font></h4><br/></td></tr>
-			<tr>
-				<td colspan=2>
-				<button type="button" onclick = "window.location.href='login_admin.php'" class="up_btn">ADMIN LOGIN</td>
-			</tr>
 			
 		</table>
 	</form>

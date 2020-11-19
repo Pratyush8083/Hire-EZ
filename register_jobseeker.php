@@ -118,6 +118,13 @@
 	</tr>
 
 	<tr>
+	<td><h4>Profession Type</h4></td>
+		<td><input type="radio" name="p_type" value="fresher" onchange="show_prof()" required>&nbsp Fresher</td>
+		<td><input type="radio" name="p_type" value="professional" onchange="show_prof()" required>&nbsp Professional</td>
+		<td><input type="radio" name="p_type" value="freelancer" onchange="show_free()" required>&nbsp Freelancer</td>
+	</tr>
+
+	<tr>
 		<td colspan=5>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-key" style="font-size:20px;"></></i>
@@ -218,6 +225,7 @@ if(isset($_POST['continue']))
 	$city=$_POST['city'];  
 	$state=$_POST['state'];  
 	$country=$_POST['country'];  
+	$p_type=$_POST['p_type'];
 	$password=$_POST['password'];
 
 	$sql="select * from job_seeker WHERE email=?";
@@ -235,10 +243,10 @@ if(isset($_POST['continue']))
 	else
 	{  
 	$enc_psw = password_hash($password, PASSWORD_DEFAULT);
-    $insert_user="insert into job_seeker (name,dob,phone_no,email,street,city,state,country,password) VALUES (?,?,?,?,?,?,?,?,?)";  
+    $insert_user="insert into job_seeker (name,dob,phone_no,email,street,city,state,country,profession_type,password) VALUES (?,?,?,?,?,?,?,?,?,?)";  
     $stmt = $conn->prepare($insert_user);
 
-	$stmt->bind_param("sssssssss", $username, $dob, $phone, $email, $street, $city, $state, $country, $enc_psw);
+	$stmt->bind_param("ssssssssss", $username, $dob, $phone, $email, $street, $city, $state, $country, $p_type, $enc_psw);
 
 	if($stmt->execute())  
     {  

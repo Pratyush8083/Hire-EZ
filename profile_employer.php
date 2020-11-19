@@ -1,3 +1,22 @@
+<?php
+session_start();  
+if(!$_SESSION['email'])  
+{  
+      header("Location: login_employer.php");//redirect to login page to secure the welcome page without login access.  
+}
+
+include("db_connection.php");  
+
+  $sql = "select eid,name,email,description,address,employer_type from employer WHERE email = ?";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("s", $_SESSION['email']);
+	$stmt->execute();
+  $result = $stmt->get_result();
+  $row = $result->fetch_assoc();
+  $_SESSION["eid"] = $row['eid'];
+?> 
+
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -15,14 +34,15 @@
 
 <body>
   <div class="page">
-    <header tabindex="0">Candidate Profile</header>
+    <header tabindex="0">WELCOME <?php echo $row['name'];?></header>
     <div id="nav-container">
       <div class="bg"></div>
       <div class="button" tabindex="0"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
       <div id="nav-content" tabindex="0">
         <ul>
-          <li><a href="forum_candidate.php">GO TO FORUM</a></li>
-          <!-- <li><a href="#0">SEND MAIL TO VOTERS</a></li> -->
+          <li><a href="my_jobs.php">My Job Posts</a></li>
+          <li><a href="jobs.php" style="color:green;">Create Job Post</a></li>
+          <li><a href="job_applications.php">View Applicants</a></li>
           <li><a href="logout.php" style="color:red;">LOGOUT</a></li>
         </ul>
       </div>
@@ -31,15 +51,11 @@
           <br> <img class="card-img-top" src="https://picsum.photos/200/150/?random">
           <br>
           <div class="card-block">
-            <center>
-              <h4 class="card-title">${Candidate_Name}</h4></center>
             <div class="card-text">
-              <p>Candidate ID : ${cID}</p>
-              <p>Date of Birth : ${dob}</p>
-              <p>Email : ${email}</p>
-              <p>Educational Qualification : ${qualification}</p>
-              <p>Party Name : ${party}</p>
-              <p>Constitution : ${constitution}</p>
+              <p>Email : <?php echo $row['email'];?></p>
+              <p>Description : <?php echo $row['description'];?></p>
+              <p>Employer Type : <?php echo $row['employer_type'];?></p>
+              <p>Address : <?php echo $row['address'];?></p>
             </div>
           </div>
         </div>

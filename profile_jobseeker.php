@@ -40,9 +40,10 @@ include("db_connection.php");
       <div class="bg"></div>
       <div class="button" tabindex="0"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </div>
       <div id="nav-content" tabindex="0">
-        <ul>
-          <li><a href="manage_jobseeker_profile.php">Manage Profile</a></li>
-          <li><a href="vote.php" style="color:green;">View Job Post</a></li>
+        <ul>        
+        <li><a href="manage_jobseeker_qualification.php">Manage Qualification</a></li>
+          <li><a href="manage_jobseeker_exp.php">Manage Work Experience</a></li>
+          <li><a href="job_search.php" style="color:green;">View Job Post</a></li>
           <li><a href="my_application.php">My Application(s)</a></li>
           <li><a href="logout.php" style="color:red;">LOGOUT</a></li>
         </ul>

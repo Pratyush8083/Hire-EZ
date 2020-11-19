@@ -1,3 +1,14 @@
+<?php
+session_start();  
+if(!$_SESSION['email'])  
+{  
+      header("Location: login_employer.php");//redirect to login page to secure the welcome page without login access.  
+}
+echo $_SESSION["eid"];
+echo $_SESSION["email"];
+?>
+
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -22,117 +33,58 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
 <div>
     
-    <center><p class="header_text">CANDIDATES LIST IN ${Constitution}</p></center>
+    <center><p class="header_text">CREATE JOB POST</p></center>
     
     </div>
 </nav>
 
-<form action="thank_you.php" method="POST">
+<div align="center" id="main_form">	
+<form action="jobs.php" method="POST">
 
-<div align="center">
-
-	<table class="form_tab">
-
+	<table class="form_tab">	
 	<tr>
-
-		<td>
-
-		<div class="cand_list">
-
-		<center>
-			<table>
-			<tr>
-
-				<td><input type="radio" name="candidate" value="${candidate1}" required></td>
-
-				<td><img src="images/1.png" height="50px" width="50px"/></td>
-
-				<td>
-					<p><strong>${candidate_1}</strong><br/></p>
-				</td>
-
-			</tr>
-
-			<tr>
-
-				<td><input type="radio" name="candidate" value="${candidate2}" required></td>
-
-				<td><img src="images/1.png" height="50px" width="50px"/></td>
-
-				<td>
-					<p><strong>${candidate_2}</strong><br/></p>
-				</td>
-
-			</tr>
-
-			<tr>
-
-				<td><input type="radio" name="candidate" value="${candidate3}" required></td>
-
-				<td><img src="images/1.png" height="50px" width="50px"/></td>
-
-				<td>
-					<p><strong>${candidate_3}</strong><br/></p>
-				</td>
-
-			</tr>
-
-			<tr>
-
-				<td><input type="radio" name="candidate" value="${candidate3}" required></td>
-
-				<td><img src="images/1.png" height="50px" width="50px"/></td>
-
-				<td>
-					<p><strong>${candidate_4}</strong><br/></p>
-				</td>
-
-			</tr>
-
-			<tr>
-
-				<td><input type="radio" name="candidate" value="${candidate3}" required></td>
-
-				<td><img src="images/1.png" height="50px" width="50px"/></td>
-
-				<td>
-					<p><strong>${candidate_5}</strong><br/></p>
-				</td>
-
-			</tr>
-
-			<tr>
-
-				<td><input type="radio" name="candidate" value="${candidate3}" required></td>
-
-				<td><img src="images/1.png" height="50px" width="50px"/></td>
-
-				<td>
-					<p><strong>${candidate_6}</strong><br/></p>
-				</td>
-
-			</tr>
-
-		</table></center>
-
+        <td>
+            <br/><a href="profile_employer.php" class="up_btn" style="margin-left:80%;">BACK TO DASHBOARD</a> <br/><br/>
+        </td>
+    </tr>
+	<tr>
+		<td colspan=5>
+		<div class="user-input-wrp"><br/>
+		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
+		<input type="text" name="title" id="title" autocomplete="off" class="inputText" required/>
+		<span class="floating-label">Title</span><br/>
 		</div>
-
 		</td>
-
+	</tr>
+	
+	<tr>
+		<td colspan=5>
+		<div class="user-input-wrp"><br/>
+		<i class="fa fa-user-circle-o" style="font-size:20px;"></i>
+		<input type="text" name="type" id="type" autocomplete="off" class="inputText" required/>
+		<span class="floating-label">Type</span><br/>
+		</div>
+		</td>
 	</tr>
 
 	<tr>
-
-		<td>
-
-		<center><button type="submit" class="vote_btn" name="vote">VOTE</button></center>
-
+		<td colspan=5>
+		<div class="user-input-wrp"><br/>
+		<i class="fa fa-envelope-o" style="font-size:20px;"></i>
+		<input type="text" name="desc" id="desc" autocomplete="off" class="inputText" required/>
+		<span class="floating-label">Job Description</span><br/>
+		<p id="msg" style="font-size:14px;color:red;margin-left:10%;"></p>
+		</div>
 		</td>
-
 	</tr>
 
+	<tr>
+		<td colspan=3><br/>
+		<button type="submit" class="btn" name="create_job" id="create_job"></p> Create Job</button>
+		</td>
+	</tr>
 	</table>
-
+</form>
 </div>
 
 </form>
@@ -140,3 +92,25 @@
 </body>
 
 </html>
+
+<?php  
+include("db_connection.php");
+if(isset($_POST['create_job']))  
+{  
+
+	$title=$_POST['title'];
+	$type=$_POST['type'];
+	$desc=$_POST['desc'];
+
+    $insert_user="insert into jobs (title,type,description,eid) VALUES (?,?,?,?)";  
+    $stmt = $conn->prepare($insert_user);
+	$stmt->bind_param("sssi", $title, $type, $desc, $_SESSION["eid"]);
+
+	if($inserted = $stmt->execute()){
+		echo "<script>
+		alert('Job created!');
+		window.location.href='profile_employer.php'
+		</script>";
+	}
+}
+?>
