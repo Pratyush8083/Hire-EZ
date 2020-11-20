@@ -6,9 +6,10 @@ if(!$_SESSION['email'])
 }
 include("db_connection.php");  
 
-$job=$_GET['del'];  
+$job_id=$_GET['job_id'];  
+$jid=$_GET['jid'];  
 
-$delete_query="delete from jobs WHERE job_id='".$job."'";//delete query  
+$delete_query="delete from job_selection WHERE job_id='".$job_id."' AND jid='".$jid."'";//delete query  
 
 $run=$conn->query($delete_query);  
 
@@ -17,8 +18,8 @@ if($run)
 {   
 
     echo "<script>
-    alert('Job post deleted successfully!');
-    window.open('my_jobs.php','_self')</script>";  
+    alert('Job application rejected successfully!');
+    window.open('job_applications.php','_self')</script>";  
 
 }  
 ?>

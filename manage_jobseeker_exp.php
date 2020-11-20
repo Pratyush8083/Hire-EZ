@@ -81,35 +81,12 @@ include("db_connection.php");
 		$exp = $freelancer['experience'];
 	}
 
-	$sql5 = "select name,description,pid from projects WHERE jid = ?";
+	$sql5 = "select name,description,reference_link from projects p,project_references pr WHERE p.pid=pr.pid and p.jid = ?";
 	$stmt5 = $conn->prepare($sql5);
 	$stmt5->bind_param("i", $jid);
 	$stmt5->execute();
   	$result5 = $stmt5->get_result();
-	$projects = $result5->fetch_assoc();
 
-	if ($result5->num_rows == 0)  {
-		$p_name = "";
-		$p_desc = "";
-		$pid = "";
-	} else {	
-		$p_name = $projects['name'];
-		$p_desc = $projects['description'];
-		$pid = $projects['pid'];
-	}
-
-	$sql6 = "select reference_link from project_references WHERE pid = ?";
-	$stmt6 = $conn->prepare($sql6);
-	$stmt6->bind_param("i", $pid);
-	$stmt6->execute();
-  	$result6 = $stmt6->get_result();
-	$project_references = $result6->fetch_assoc();
-
-	if ($result6->num_rows == 0)  {
-		$p_ref_link = "";
-	} else {	
-		$p_ref_link = $project_references['reference_link'];
-	}
 
 ?> 
 <!DOCTYPE HTML>
@@ -288,13 +265,38 @@ include("db_connection.php");
 	</div>
 
 <div align="center" id="free_div" style="display:none">
-	<form action="manage_jobseeker_exp.php" method="POST">
-	<table class="form_tab">
+<table class="form_tab">
 	<tr>
 		<td colspan=2>
 			<a href="profile_jobseeker.php" class="up_btn" style="margin-left:77%;">BACK TO PROFILE</a>	
 		</td>
 	</tr>
+</table>
+	<table class="form_tab" border=1> 
+        <thead>  
+
+        <tr>   
+            <th>Project Name</th>  
+            <th>Description</th>  
+            <th>Reference Link</th>  
+        </tr>  
+
+        </thead>  
+        <?php
+			while($row = $result5->fetch_assoc())
+			{
+			?>
+			<tr>
+            <td><?php echo $row['name'] ?></td> 
+            <td><?php echo $row['description'] ?></td>          
+            <td><?php echo $row['reference_link'] ?></td> 
+			</tr>
+			<?php
+			}				
+			?>         
+    </table>
+	<form action="manage_jobseeker_exp.php" method="POST">
+	<table class="form_tab">
 
 	<tr>
 		<td colspan=3>
@@ -306,13 +308,13 @@ include("db_connection.php");
 	</tr>	
 	
 	<tr>
-	<td><h5>Last Project Details</h5></td>
+	<td><h5>Add Past Project Details</h5></td>
 	</tr>
 	<tr>
 		<td colspan=3>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-calendar" style="font-size:20px;"></i>
-		<input type="text" name="p_name" id="p_name" value="<?php echo $p_name; ?>" class="inputText"/>
+		<input type="text" name="p_name" id="p_name" class="inputText"/>
 		<span class="floating-label">Project Name</span><br/>
 		</div>
 		</td>
@@ -322,7 +324,7 @@ include("db_connection.php");
 		<td colspan=3>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="p_desc" id="p_desc" class="inputText" value="<?php echo $p_desc; ?>"/>
+		<input type="text" name="p_desc" id="p_desc" class="inputText"/>
 		<span class="floating-label">Description</span><br/></div>
 		</td>
 	</tr>
@@ -331,7 +333,7 @@ include("db_connection.php");
 		<td colspan=3>
 		<div class="user-input-wrp"><br/>
 		<i class="fa fa-money" style="font-size:20px;"></i>
-		<input type="text" name="p_ref_link" id="p_ref_link" class="inputText" value="<?php echo $p_ref_link; ?>"/>
+		<input type="text" name="p_ref_link" id="p_ref_link" class="inputText"/>
 		<span class="floating-label">Reference Link</span><br/></div>
 		</td>
 	</tr>
@@ -429,17 +431,10 @@ if(isset($_POST['save_free']))
 
 	$p_name=$_POST['p_name'];
 	$p_desc=$_POST['p_desc'];	
-	$sql="select * from projects WHERE jid=?";
+	$sql="insert into projects (name,description,jid) VALUES (?,?,?)";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param("i", $jid);
+	$stmt->bind_param("ssi", $p_name, $p_desc, $jid);
 	$stmt->execute();
-	$res = $stmt->get_result();
-	if ($res->num_rows == 0)  {
-		$sql="insert into projects (name,description,jid) VALUES (?,?,?)";
-		$stmt = $conn->prepare($sql);
-		$stmt->bind_param("ssi", $p_name, $p_desc, $jid);
-		$stmt->execute();
-	}	
 
 	$sql="select pid from projects WHERE name=?";
 	$stmt = $conn->prepare($sql);
@@ -448,19 +443,14 @@ if(isset($_POST['save_free']))
 	$res = $stmt->get_result();
 	$projects = $res->fetch_assoc();
 
+	
 	$pid = $projects['pid'];
 	$p_ref_link=$_POST['p_ref_link'];
-	$sql="select * from project_references WHERE pid=?";
-	$stmt = $conn->prepare($sql);
-	$stmt->bind_param("i", $pid);
-	$stmt->execute();
 	$res = $stmt->get_result();
-	if ($res->num_rows == 0)  {
-		$sql="insert into project_references (pid, reference_link) VALUES (?,?)";
-		$stmt = $conn->prepare($sql);
-		$stmt->bind_param("is", $pid, $p_ref_link);
-		$stmt->execute();
-	}
+	$sql="insert into project_references (pid, reference_link) VALUES (?,?)";
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("is", $pid, $p_ref_link);
+	$stmt->execute();
 	echo "<script>window.location.href='manage_jobseeker_exp.php'</script>";
 }
 ?>  

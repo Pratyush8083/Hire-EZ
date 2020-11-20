@@ -1,3 +1,13 @@
+<?php  
+session_start();
+if(!$_SESSION['email'])  
+{  
+      header("Location: login_jobseeker.php");//redirect to login page to secure the welcome page without login access.  
+}
+include("db_connection.php");
+$sql = "select jobs.job_id,jobs.title,employer.name,jobs.description from jobs, job_selection, employer where job_selection.job_id=jobs.job_id and jobs.eid=employer.eid and job_selection.jid='".$_SESSION['jid']."'";
+$result=$conn->query($sql);  
+?>
 <html>
 
 <head>
@@ -34,7 +44,7 @@
     
     <tr>
         <td>
-            <br/><a href="profile_voter.php" class="up_btn" style="margin-left:85%;">BACK TO PROFILE</a> <br/><br/>
+            <br/><a href="profile_jobseeker.php" class="up_btn" style="margin-left:85%;">BACK TO PROFILE</a> <br/><br/>
         </td>
     </tr>
 </table>
@@ -45,8 +55,9 @@
 
         <tr>  
             <th>Company Name</th> 
-            <th>Job Post</th>  
-            <th></th>   
+            <th>Job Post</th> 
+            <th>Job Description</th>  
+            <th>Action</th>   
         </tr>  
 
         </thead>  
@@ -54,11 +65,19 @@
 
         <!-- return list of candidates -->
         <!--loop through all the candidates -->  
-        <tr>  		
-            <td>${com_name}</td>    
-            <td>${job_post}</td>
-            <td><button>WITHDRAW</button></td>       
-        </tr>  
+        <?php
+			while($row = $result->fetch_assoc())
+			{
+			?>
+			<tr>
+            <td><?php echo $row['name'] ?></td> 
+            <td><?php echo $row['title'] ?></td> 
+            <td><?php echo $row['description'] ?></td>          
+            <td><a href="withdraw_job.php?job_id=<?php echo $row['job_id'] ?>&jid=<?php echo $_SESSION['jid'] ?>"><button class="red_btn">WITHDRAW</button></a></td> 
+			</tr>
+			<?php
+			}				
+		?>  
 
 
     </table>

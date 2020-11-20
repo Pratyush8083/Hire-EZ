@@ -4,8 +4,6 @@ if(!$_SESSION['email'])
 {  
       header("Location: login_employer.php");//redirect to login page to secure the welcome page without login access.  
 }
-echo $_SESSION["eid"];
-echo $_SESSION["email"];
 ?>
 
 <!DOCTYPE HTML>

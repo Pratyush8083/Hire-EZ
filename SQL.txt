@@ -1,0 +1,48 @@
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "hireez_db";
+$conn = new mysqli($servername, $username, $password, $dbname)
+
+Jobseeker:
+---------------------------------------------------------------------------------------------------
+insert into job_seeker (name,dob,phone_no,email,street,city,state,country,profession_type,password) VALUES (?,?,?,?,?,?,?,?,?,?)
+select * from job_seeker WHERE email=?
+select password from job_seeker WHERE email = ?
+select jid,name,dob,phone_no,email,street,city,state,country from job_seeker WHERE email = ?
+select title, marks_ob, file from qualification_documents WHERE jid = ?
+update qualification_documents set title =?, marks_ob= ?, file = ? WHERE jid = ?
+insert into qualification_documents (title,marks_ob,file, jid) VALUES (?,?,?,?)
+select profession_type from job_seeker WHERE jid = ?
+select pcid, work_description, start_date, end_date from worked_for WHERE jid = ?
+select current_company, current_company_start_date from professional WHERE jid = ?
+select name, type, reg_no from prev_companies WHERE pcid = ?
+select experience from freelancer WHERE jid = ?
+select name,description,reference_link from projects p,project_references pr WHERE p.pid=pr.pid and p.jid = ?
+insert into professional (jid,current_company,current_company_start_date) VALUES (?,?,?)
+select pcid from prev_companies WHERE name=?
+insert into prev_companies (name,type,reg_no) VALUES (?,?,?)
+insert into worked_for (work_description,start_date,end_date,jid,pcid) VALUES (?,?,?,?,?)
+select * from freelancer WHERE jid=?
+insert into freelancer (jid, experience) VALUES (?,?)
+insert into projects (name,description,jid) VALUES (?,?,?)
+select pid from projects WHERE name=?
+insert into project_references (pid, reference_link) VALUES (?,?)
+select job_id,title,type,description from jobs where job_id NOT IN (Select job_id from job_selection where jid = '".$_SESSION['jid']."')
+select jobs.job_id,jobs.title,employer.name,jobs.description from jobs, job_selection, employer where job_selection.job_id=jobs.job_id and jobs.eid=employer.eid and job_selection.jid='".$_SESSION['jid']."'
+insert into job_selection (jid,job_id,status) VALUES (?,?,?)
+delete from job_selection WHERE job_id='".$job_id."' AND jid='".$jid."'
+
+Employer:
+----------------------------------------------------------------------------------------------------
+insert into employer (name,email,description,address,employer_type,password) VALUES (?,?,?,?,?,?)
+select eid,employer_type from employer WHERE email=?
+insert into company_employer (eid,reg_no,website) VALUES (?,?,?)
+insert into individual_employer (eid,ssn) VALUES (?,?)
+select password from employer WHERE email = ?
+select eid,name,email,description,address,employer_type from employer WHERE email = ?
+insert into jobs (title,type,description,eid) VALUES (?,?,?,?)
+select job_id,title,type,description from jobs where eid=?
+select jobs.title as jtitle,job_selection.jid,job_selection.job_id,job_seeker.name,qd.title as qtitle,qd.marks_ob,qd.file from jobs,job_selection,job_seeker,qualification_documents qd where jobs.eid='".$_SESSION['eid']."' and jobs.job_id=job_selection.job_id and job_selection.jid=job_seeker.jid and job_seeker.jid=qd.jid
+delete from job_selection WHERE job_id='".$job_id."' AND jid='".$jid."'
+

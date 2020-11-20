@@ -46,6 +46,20 @@ $result=$conn->query($sql);
     </tr>
     </table>
 
+    <table class="form_tab">  
+    <tr><td>Search</td></tr>
+        <tr>
+            <td>
+			<form class="example" action="/action_page.php">
+            <input type="text" placeholder="Search Jobs..." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+		    </td>
+        </tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+    </table>
+
 	<table class="form_tab" border=1>  
 
         <thead>  
