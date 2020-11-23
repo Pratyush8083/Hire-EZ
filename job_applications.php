@@ -5,7 +5,7 @@ if(!$_SESSION['email'])
       header("Location: login_employer.php");//redirect to login page to secure the welcome page without login access.  
 }
 include("db_connection.php");
-$sql = "select jobs.title as jtitle,job_selection.jid,job_selection.job_id,job_seeker.name,qd.title as qtitle,qd.marks_ob,qd.file from jobs,job_selection,job_seeker,qualification_documents qd where jobs.eid='".$_SESSION['eid']."' and jobs.job_id=job_selection.job_id and job_selection.jid=job_seeker.jid and job_seeker.jid=qd.jid";
+$sql = "select status,jobs.title as jtitle,job_selection.jid,job_selection.job_id,job_seeker.name,qd.title as qtitle,qd.marks_ob,qd.file from jobs,job_selection,job_seeker,qualification_documents qd where jobs.eid='".$_SESSION['eid']."' and jobs.job_id=job_selection.job_id and job_selection.jid=job_seeker.jid and job_seeker.jid=qd.jid";
 $result=$conn->query($sql);  
 ?>
 <html>
@@ -46,20 +46,6 @@ $result=$conn->query($sql);
     </tr>
     </table>
 
-    <table class="form_tab">  
-    <tr><td>Search</td></tr>
-        <tr>
-            <td>
-			<form class="example" action="/action_page.php">
-            <input type="text" placeholder="Search Jobs..." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-		    </td>
-        </tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-    </table>
-
 	<table class="form_tab" border=1>  
 
         <thead>  
@@ -70,6 +56,7 @@ $result=$conn->query($sql);
             <th>Qualification</th> 
             <th>Marks Obtained</th>  
             <th>Document</th>    
+            <th>Application Status</th>
             <th colspan=2>Action</th>  
         </tr>  
 
@@ -84,13 +71,94 @@ $result=$conn->query($sql);
             <td><?php echo $row['qtitle'] ?></td>      
             <td><?php echo $row['marks_ob'] ?></td> 
             <td><img src="<?php echo "uploads/".$row['file'] ?>" alt="Qualification Doc" width="120" height="120" style="float:right"></td>   
-            <td><a href="reject_application.php?job_id=<?php echo $row['job_id'] ?>&jid=<?php echo $row['jid'] ?>"><button class="green_btn">ACCEPT</button></a></td>
+            <td><?php echo $row['status'] ?></td>    
+            <td><a href="accept_application.php?job_id=<?php echo $row['job_id'] ?>&jid=<?php echo $row['jid'] ?>"><button class="green_btn">ACCEPT</button></a></td>
             <td><a href="reject_application.php?job_id=<?php echo $row['job_id'] ?>&jid=<?php echo $row['jid'] ?>"><button class="red_btn">REJECT</button></a></td>
 			</tr>
 			<?php
 			}				
 			?>  
         
+    </table>
+
+    <table class="form_tab">  
+    <tr><td><br/><br/><b>Search Candidates</b></td></tr>
+        <tr>
+            <td>
+			<form class="example" action="job_applications.php" method="POST">
+            <input type="text" id="term" name="term" placeholder="Search candidates by qualification and marks obtained...">
+            <button type="submit" name="search_btn"><i class="fa fa-search"></i></button>
+            </form>
+		    </td>
+        </tr>
+        <tr><td></td></tr>
+        <tr><td></td></tr>
+    </table>
+
+    <table id="search_table" class="form_tab" border=1 style="display:none">  
+
+    <thead>  
+
+    <tr>  
+            <th>JobSeeker Name</th>  
+            <th>Job Title</th>  
+            <th>Qualification</th> 
+            <th>Marks Obtained</th>  
+            <th>Document</th>    
+            <th>Application Status</th>
+            <th colspan=2>Action</th>  
+        </tr>  
+
+    </thead>  
+    
+    <?php
+    if(isset($_POST['search_btn']))  
+    
+    {  
+    
+        $term=$_POST['term']; 
+        $t = "%".$term."%";
+        $m = (float)$term;
+        if($m == 0){
+            $m = 101;
+        }
+        $sql1="select status,jobs.title as jtitle,job_selection.jid,job_selection.job_id,job_seeker.name,qd.title as qtitle,qd.marks_ob,qd.file from jobs,job_selection,job_seeker,qualification_documents qd where (qd.title like ? or qd.marks_ob > ?) and jobs.eid='".$_SESSION['eid']."' and jobs.job_id=job_selection.job_id and job_selection.jid=job_seeker.jid and job_seeker.jid=qd.jid";
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->bind_param("sd", $t, $m);
+        $stmt1->execute();
+        $search_result = $stmt1->get_result();
+        if ($search_result->num_rows > 0) 
+        { ?>
+            <script>
+                document.getElementById('search_table').style.display = "block";
+            </script>
+        <?php }
+        else{
+            ?>
+        <script>
+                document.write('No results');
+            </script>
+            <?php
+        }  
+    
+    
+        while($row1 = $search_result->fetch_assoc())
+        {
+			?>
+			<tr>
+            <td><?php echo $row1['name'] ?></td> 
+            <td><?php echo $row1['jtitle'] ?></td> 
+            <td><?php echo $row1['qtitle'] ?></td>      
+            <td><?php echo $row1['marks_ob'] ?></td>
+            <td><img src="<?php echo "uploads/".$row1['file'] ?>" alt="Qualification Doc" width="120" height="120" style="float:right"></td>   
+            <td><?php echo $row1['status'] ?></td>    
+            <td><a href="accept_application.php?job_id=<?php echo $row1['job_id'] ?>&jid=<?php echo $row1['jid'] ?>"><button class="green_btn">ACCEPT</button></a></td>
+            <td><a href="reject_application.php?job_id=<?php echo $row1['job_id'] ?>&jid=<?php echo $row1['jid'] ?>"><button class="red_btn">REJECT</button></a></td>
+			</tr>
+			<?php
+			}	
+    }		
+        ?>         
     </table>
 </div>
 

@@ -5,7 +5,7 @@ if(!$_SESSION['email'])
       header("Location: login_jobseeker.php");//redirect to login page to secure the welcome page without login access.  
 }
 include("db_connection.php");
-$sql = "select jobs.job_id,jobs.title,employer.name,jobs.description from jobs, job_selection, employer where job_selection.job_id=jobs.job_id and jobs.eid=employer.eid and job_selection.jid='".$_SESSION['jid']."'";
+$sql = "select jobs.job_id,jobs.title,employer.name,jobs.description, job_selection.status from jobs, job_selection, employer where job_selection.job_id=jobs.job_id and jobs.eid=employer.eid and job_selection.jid='".$_SESSION['jid']."'";
 $result=$conn->query($sql);  
 ?>
 <html>
@@ -57,6 +57,7 @@ $result=$conn->query($sql);
             <th>Company Name</th> 
             <th>Job Post</th> 
             <th>Job Description</th>  
+            <th>Application Status</th>
             <th>Action</th>   
         </tr>  
 
@@ -72,7 +73,8 @@ $result=$conn->query($sql);
 			<tr>
             <td><?php echo $row['name'] ?></td> 
             <td><?php echo $row['title'] ?></td> 
-            <td><?php echo $row['description'] ?></td>          
+            <td><?php echo $row['description'] ?></td>     
+            <td><?php echo $row['status'] ?></td>      
             <td><a href="withdraw_job.php?job_id=<?php echo $row['job_id'] ?>&jid=<?php echo $_SESSION['jid'] ?>"><button class="red_btn">WITHDRAW</button></a></td> 
 			</tr>
 			<?php

@@ -5,7 +5,7 @@ if(!$_SESSION['email'])
       header("Location: login_jobseeker.php");//redirect to login page to secure the welcome page without login access.  
 }
 include("db_connection.php");  
-echo $_SESSION['jid'];
+
 $job_id=$_GET['job_id'];  
 $status="applied";
 $insert_user="insert into job_selection (jid,job_id,status) VALUES (?,?,?)";  
